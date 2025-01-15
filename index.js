@@ -1,4 +1,5 @@
 import express from "express";
+import ejs from "ejs";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -23,8 +24,28 @@ app.get("/allblogs", (req, res) => {
   res.render("BlogPage.ejs", { blogs: truncatedBlogs });
 });
 
-app.post("/writeblog", (req, res) => {
+app.get("/writeblog", (req, res) => {
     res.render("createBlog.ejs");
+});
+
+app.post("/updatedallblogs", (req, res) => {
+    const newBlog = {
+        title: req.body.title,
+        Author: req.body.author,
+        content: req.body.content
+    };
+
+    blogs.push(newBlog); // Adding the new blog to the blogs array
+
+    const truncatedBlogs = blogs.map(blog => {
+        const words = blog.content.split(" ");
+        return {
+            ...blog,
+            truncatedContent: words.length > 40 ? words.slice(0, 40).join(" ") + "..." : blog.content
+        };
+    });
+
+    res.render("BlogPage.ejs", { blogs: truncatedBlogs });
 });
 
 app.get("/viewblog", (req, res) => {
@@ -37,16 +58,45 @@ app.get("/viewblog", (req, res) => {
     }
 });
 
-app.post("/editblog", (req, res) => {
-    
+
+app.get("/editblog", (req, res) => {
+    const editindex = req.query.index;
+    if (editindex >= 0 && editindex < blogs.length) {
+        const blogedit = blogs[editindex];
+        res.render("createBlog.ejs", { blogedit: blogedit, index:editindex });
+    }
+    else {
+        res.status(404).send("Blog not found");
+    }
+});
+
+app.post("/editedblog", (req, res) => {
+    const editIndex = parseInt(req.body.index, 10); 
+    console.log("Edit Index:", editIndex); 
+  if (editIndex >= 0 && editIndex < blogs.length) {
+    blogs[editIndex].title = req.body.title;
+    blogs[editIndex].Author = req.body.author;
+    blogs[editIndex].content = req.body.content;
+
+    const truncatedBlogs = blogs.map(blog => {
+      const words = blog.content.split(" ");
+      return {
+        ...blog,
+        truncatedContent: words.length > 40 ? words.slice(0, 40).join(" ") + "..." : blog.content
+      };
+    });
+
+    res.render("BlogPage.ejs", { blogs: truncatedBlogs });
+  } else {
+    res.status(400).send("Invalid blog index");
+  }
 });
 
 app.post("/deleteblog", (req, res) => {
-    const index = parseInt(req.query.index, 10); // Parse index as an integer
+    const index = parseInt(req.query.index, 10); 
     if (index >= 0 && index < blogs.length) {
-        blogs.splice(index, 1); // Remove the blog at the specified index
+        blogs.splice(index, 1); 
         
-        // Apply the truncation logic for rendering
         const truncatedBlogs = blogs.map(blog => {
             const words = blog.content.split(" ");
             return {

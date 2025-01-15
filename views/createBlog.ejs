@@ -1,7 +1,19 @@
 <%- include("partials/header.ejs") %>
+    <%if(locals.blogedit){%>
+        <form action="/editedblog" method="POST">
+            <input name="title" type="text" class="" value="<%= blogedit.title %>" />
+            <input name="author" type="text" class="" value="<%= blogedit.Author %>" />
+            <input type="hidden" name="index" value="<%=index%>" />
+            <textarea name="content" class=""><%= blogedit.content %></textarea>
+            <input type="submit" value="DONE" />
+        </form>
+        <%}else{%>
+            <form action="/updatedallblogs" method="POST">
+                <input name="title" type="text" class="" placeholder="Title of the blog" />
+                <input name="author" type="text" class="" placeholder="Name of the Author" />
+                <textarea name="content" class="" placeholder="Write your blog here"></textarea>
+                <input type="submit" value="DONE" />
+            </form>
+            <% } %>
 
-
-    
-
-
-    <%- include("partials/footer.ejs") %>
+                <%- include("partials/footer.ejs") %>
