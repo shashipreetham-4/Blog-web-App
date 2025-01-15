@@ -1,8 +1,36 @@
 <%- include("partials/header.ejs") %>
 
+    <% if(locals.blog){ %>
+        <div>
+            <h1>
+                <%= blog.title %>
+            </h1>
+        </div>
+        <div>
+            <h3>Created by: <%= blog.Author %>
+            </h3>
+        </div>
+        <div>
+            <p>
+                <%= blog.content %>
+            </p>
+        </div>
+        <% }else{ %>
+            <div>
+                <h1>
+                    Blog title
+                </h1>
+            </div>
+            <div>
+                <h3>Created by:
+                </h3>
+            </div>
+            <div>
+                <p>
+                    Sorry, Couldn't found the blog...
+                </p>
+            </div>
+            <% } %>
 
 
-
-
-
-    <%- include("partials/footer.ejs") %>
+                <%- include("partials/footer.ejs") %>
