@@ -1,39 +1,43 @@
 <%- include("partials/header.ejs") %>
 
-    <a href="/writeblog" class="btn btn-primary justify-content-center" method="POST">Create</a>
-    <% if (blogs && blogs.length> 0) { %>
-        <% blogs.forEach((blog, index)=> { %>
-            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal">
-                                <%= blog.title %>
-                            </h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">By <small class="text-body-secondary fw-light">
-                                    <%= blog.Author %>
-                                </small>
-                            </h1>
-                            <p>
-                                <%= blog.content.split(" ").slice(0, 40).join(" ") %>...
-                        </p>
-                        <a href=" /viewblog?index=<%=index %>" class="btn btn-primary justify-content-center">View</a>
-                                    <a href="/editblog?index=<%= index %>"
-                                        class="btn btn-primary justify-content-center">Edit</a>
-                                    <form action="/deleteblog?index=<%= index %>" method="POST"
-                                        style="display: inline;">
-                                        <button type="submit"
-                                            class="btn btn-primary justify-content-center">Delete</button>
-                                    </form>
+    <div class="container py-4">
+        <div class="d-flex justify-content-center mb-3">
+            <a href="/writeblog" class="btn btn-primary">Create New Blog</a>
+        </div>
+
+        <% if (blogs && blogs.length> 0) { %>
+            <div class="row">
+                <% blogs.forEach((blog, index)=> { %>
+                    <div class=" col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="card style-card shadow-sm rounded">
+                            <div class="card-header">
+                                <h4 class="my-0 fw-normal">
+                                    <%= blog.title %>
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title text-secondary">By <%= blog.Author %>
+                                </h6>
+                                <p class="text-truncate">
+                                    <%= blog.content.split(" ").slice(0, 40).join(" ") %>...</p>
+                            <div class=" d-flex justify-content-between">
+                                        <a href="/viewblog?index=<%= index %>" class="btn btn-outline-primary">View</a>
+                                        <a href="/editblog?index=<%= index %>"
+                                            class="btn btn-outline-secondary">Edit</a>
+                                        <form action="/deleteblog?index=<%= index %>" method="POST"
+                                            style="display: inline;">
+                                            <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                        </form>
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
             <% }) %>
-                <% } else { %>
-                    <p>No blogs available.</p>
-                    <% } %>
-
-                        <%- include("partials/footer.ejs") %>
+    </div>
+    <% } else { %>
+        <p class="text-center">No blogs available.</p>
+        <% } %>
+            </div>
+            <footer>
+                <%- include("partials/footer.ejs") %>
+            </footer>

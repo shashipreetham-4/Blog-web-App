@@ -1,16 +1,38 @@
 html,
 body {
-  height: 100%; /* Asegurarse de que el contenido ocupe toda la altura */
+  height: 100%;
+  background-color: rgb(244, 237, 211); /* Lightest color as the global background */
 }
 
 .wrapper {
-  min-height: 100%; /* Asegurarse de que el contenedor tenga al menos la altura completa */
-  display: flex; /* Usar Flexbox para alinear elementos */
-  flex-direction: column; /* Alinear elementos en columna */
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.2);
+  background-color: rgb(126, 153, 163); /* Light blue for footer */
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+footer:hover {
+  box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.4);
+}
+
+footer #owner,
+footer #copy {
+  margin: 0;
 }
 
 .contenido {
-  flex: 1; /* El contenido toma todo el espacio disponible */
+  flex: 1;
 }
 
 body {
@@ -19,36 +41,78 @@ body {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-/* header */
-.nav {
+nav {
   margin: 0;
   display: flex;
   justify-content: space-between;
   box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.25);
+  background-color: rgb(57, 66, 67); /* Darkest color for header */
+  color: white;
 }
 
-.nav h1 {
+nav h1 {
   margin-left: 25px;
+  color: white;
 }
 
-.nav div {
+nav div {
   align-self: center;
   display: flex;
   justify-content: flex-end;
   flex-grow: 1;
+  color: white;
 }
 
-.nav div a {
+nav div a {
   margin-right: 40px;
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
-/* index */
+nav.header-style {
+  background-color: rgb(103, 116, 119); /* Dark header color */
+  color: white;
+  box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.25);
+}
+
+nav.header-style a.navbar-brand {
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+nav.header-style .nav-link {
+  color: rgb(244, 237, 211); /* Lightest text color */
+  margin-right: 15px;
+}
+
+nav.header-style .nav-link:hover {
+  color: rgb(165, 191, 204); /* Hover effect color */
+}
+
+nav.header-style img {
+  margin-right: 10px;
+}
+
+.navbar .nav-link.active {
+  color: rgb(244, 237, 211); /* Match body background color */
+  font-weight: bold;         /* Optional: Make the active link stand out */
+  background-color: transparent; /* Ensure no background on active links */
+  text-decoration: none;     /* Optional: Remove underline */
+}
+
+.navbar .nav-link.active:hover {
+  color: rgb(165, 191, 204); /* Slightly lighter hover effect */
+}
+
+
+
 .contenido_blog {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 55px;
+  font-size: 0.42cm;
 }
 
 .section {
@@ -68,7 +132,6 @@ body {
   width: 100%;
 }
 
-/* blogsPage */
 .btn_container {
   display: flex;
   justify-content: center;
@@ -76,28 +139,14 @@ body {
 
 .btn_create,
 .btn_submit {
-  background-color: black;
+  background-color: rgb(76, 88, 91); /* Darkest shade for buttons */
   color: white;
   font-weight: 600;
   padding: 15px 25px;
   margin: 15px;
 }
 
-.blog_container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
 
-.blog {
-  width: 25vw;
-  height: auto;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
-  padding: 0 5% 0 15px;
-  margin: 0 15px;
-  margin-bottom: 40px;
-}
 
 .btns {
   display: flex;
@@ -106,7 +155,7 @@ body {
 }
 
 .btns form input {
-  background-color: black;
+  background-color: rgb(76, 88, 91); /* Darkest shade for small buttons */
   color: white;
   font-weight: 200;
   padding: 5px 25px;
@@ -114,20 +163,13 @@ body {
   width: 90px;
 }
 
-/* blogs */
-.create_blog form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-}
-
 .title,
 .content {
   width: 80%;
   padding: 10px;
-  border: 1px solid #ccc; /* Borde para visualización */
+  border: 1px solid rgb(126, 153, 163); /* Second darkest color for borders */
+  background-color: rgb(165, 191, 204); /* Light blue for input fields */
+  color: rgb(76, 88, 91); /* Dark text color */
 }
 
 .author,
@@ -144,23 +186,21 @@ body {
 
 .content {
   flex-grow: 1;
-  border-radius: 5px; /* Borde redondeado para estilo */
-  font-size: 16px; /* Tamaño de la fuente */
-  resize: none; /* Deshabilitar el cambio de tamaño manual */
-  overflow-y: auto; /* Permitir desplazamiento vertical si es necesario */
+  border-radius: 5px;
+  font-size: 16px;
+  resize: none;
+  overflow-y: auto;
   line-height: 2;
   text-align: justify;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .author {
   width: 40%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(126, 153, 163);
+  background-color: rgb(165, 191, 204); /* Matching light blue */
 }
 
-/* viewBlog */
 .viewBlog {
   display: flex;
   justify-content: center;
@@ -184,7 +224,51 @@ body {
   line-height: 2;
 }
 
-.btn-primary{
-    background-color: rgb(151, 111, 162) ;
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgb(231, 222, 192); /* Lightest shade for cards */
+  border-radius: 10px;
 }
 
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+  background-color: rgb(76, 88, 91); /* Dark shade for buttons */
+  border-color: rgb(76, 88, 91);
+}
+
+.btn-primary:hover {
+  background-color: rgb(126, 153, 163); /* Second darkest shade for hover */
+  border-color: rgb(126, 153, 163);
+}
+
+
+
+@media (max-width: 1300px) {
+  .btns {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .section div img {
+    width: 80px;
+    margin-right: 30px;
+  }
+}
+
+.view-container{
+  margin-top: 40px;
+  background-color: rgb(231, 222, 192) ;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.container form{
+  background-color: rgb(231, 222, 192);
+}
