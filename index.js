@@ -50,6 +50,7 @@ app.post("/updatedallblogs", (req, res) => {
 
 app.get("/viewblog", (req, res) => {
     const index = req.query.index;
+    console.log(req.query);
     if (index >= 0 && index < blogs.length) {
         const blog = blogs[index];
         res.render("viewBlog.ejs", { blog });
